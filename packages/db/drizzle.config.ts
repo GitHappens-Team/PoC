@@ -13,6 +13,9 @@ export default defineConfig({
   schema: "./src/schema/index.ts",
   out: "./migrations",
   dbCredentials: {
-    url: process.env.DATABASE_URL ?? "postgres://postgres:postgres@localhost:5432/app",
+    url:
+      process.env.DATABASE_URL ??
+      "postgresql://postgres:postgres@127.0.0.1:54322/postgres",
   },
+  schemaFilter: ["public"],
 });
