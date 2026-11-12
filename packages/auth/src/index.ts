@@ -1,3 +1,31 @@
-export { createAuth } from "./config";
-export type { Auth, CreateAuthOptions, AuthEmailSender } from "./config";
-export { BREACH_CHECK_SKIPPED_HEADER, MIN_PASSWORD_LENGTH } from "./policy";
+import {
+  CookieMethodsServer,
+  createBrowserClient,
+  createServerClient,
+} from "@supabase/ssr";
+
+export function createServerSupabase({
+  url,
+  key,
+  cookies,
+}: {
+  url: string;
+  key: string;
+  cookies: CookieMethodsServer;
+}) {
+  return createServerClient(url, key, {
+    cookies,
+  });
+}
+
+export function createBrowserSupabase({
+  url,
+  key,
+}: {
+  url: string;
+  key: string;
+}) {
+  return createBrowserClient(url, key);
+}
+
+export type { User } from "@supabase/supabase-js";

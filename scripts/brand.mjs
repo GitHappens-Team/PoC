@@ -32,14 +32,15 @@ if (values.help) {
 try {
   const { brand, logos } = applyBrand(values);
   console.log(`Brand: ${brand.name} (${brand.colors.seed})`);
-  if (logos.length) console.log(`Placeholder logos rewritten: ${logos.join(", ")}`);
+  if (logos.length)
+    console.log(`Placeholder logos rewritten: ${logos.join(", ")}`);
 } catch (error) {
   console.error(error instanceof Error ? error.message : error);
   process.exit(1);
 }
 
 if (!values["no-assets"]) {
-  for (const args of [["--filter", "web", "logos"], ["--filter", "@repo/emails", "assets"]]) {
+  for (const args of [["--filter", "web", "logos"]]) {
     const { status } = spawnSync("pnpm", args, { cwd: root, stdio: "inherit" });
     if (status) process.exit(status);
   }

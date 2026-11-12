@@ -16,11 +16,12 @@
     "db:generate": "pnpm --filter @repo/db generate",
     "db:migrate": "pnpm --filter @repo/db migrate",
     "db:studio": "pnpm --filter @repo/db studio",
-    "infra:up": "docker compose -f infra/dev/docker-compose.yml up -d --wait",
-    "infra:down": "docker compose -f infra/dev/docker-compose.yml down",
-    "infra:reset": "docker compose -f infra/dev/docker-compose.yml down -v"
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:reset": "supabase db reset"
   },
   "devDependencies": {
+    "supabase": "^3.1.0",
     "turbo": "^2"
   }
 }

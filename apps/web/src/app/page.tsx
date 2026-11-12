@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { brand } from "@repo/brand";
-import { IconLogin, IconMail, IconShieldLock, IconDatabase } from "@tabler/icons-react";
+import {
+  IconLogin,
+  IconMail,
+  IconShieldLock,
+  IconDatabase,
+  IconBrandSupabase,
+} from "@tabler/icons-react";
 import { LogoLockup, LogoMark } from "@/components/logos";
 import { Button } from "@/components/ui/button";
 import { Contours } from "@/components/brand/contours";
@@ -10,17 +16,12 @@ const features = [
   {
     icon: IconShieldLock,
     title: "Secure sign-in",
-    body: "Email and password, passkeys and two-step verification, already set up.",
+    body: "Google sign in already set up.",
   },
   {
-    icon: IconMail,
-    title: "Ready-made emails",
-    body: "Email confirmation, password reset and verification codes, with your branding.",
-  },
-  {
-    icon: IconDatabase,
-    title: "Data under control",
-    body: "Postgres with Drizzle migrations: start from the auth schema and add your own.",
+    icon: IconBrandSupabase,
+    title: "Easy data",
+    body: "Supabase for everything",
   },
 ];
 
@@ -70,7 +71,7 @@ export default function Home() {
 
         <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
           <Button size="lg" asChild>
-            <Link href="/sign-up">Get started</Link>
+            <Link href="/sign-in">Get started</Link>
           </Button>
           <Button size="lg" variant="ghost" asChild>
             <Link href="#features">Learn more</Link>
@@ -78,9 +79,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="features" className="mx-auto grid w-full max-w-5xl gap-4 px-6 py-20 sm:grid-cols-3">
+      <section
+        id="features"
+        className="mx-auto grid w-full max-w-5xl gap-4 px-6 py-20 sm:grid-cols-3"
+      >
         {features.map(({ icon: Icon, title, body }) => (
-          <div key={title} className="flex flex-col gap-3 rounded-lg border border-card-border bg-card p-6 shadow-card">
+          <div
+            key={title}
+            className="flex flex-col gap-3 rounded-lg border border-card-border bg-card p-6 shadow-card"
+          >
             <Icon className="size-6 text-brand-accent" aria-hidden />
             <h2 className="text-heading">{title}</h2>
             <p className="text-body text-ink-muted">{body}</p>

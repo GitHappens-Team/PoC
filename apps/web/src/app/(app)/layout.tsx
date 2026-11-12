@@ -18,8 +18,16 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
     <div className="flex min-h-screen flex-1 flex-col">
       <header className="border-b border-border bg-card">
         <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between gap-4 px-4 sm:px-6">
-          <Link href="/dashboard" aria-label={`${brand.name}, dashboard`} className="rounded-md">
-            <LogoMark title="" aria-hidden className="h-7 w-auto text-brand-accent" />
+          <Link
+            href="/dashboard"
+            aria-label={`${brand.name}, dashboard`}
+            className="rounded-md"
+          >
+            <LogoMark
+              title=""
+              aria-hidden
+              className="h-7 w-auto text-brand-accent"
+            />
           </Link>
           <nav className="flex items-center gap-1 sm:gap-2">
             <Link
@@ -28,14 +36,19 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
             >
               Security
             </Link>
-            <span className="hidden max-w-48 truncate px-2 text-small text-ink-muted sm:inline" title={session.user.email}>
-              {session.user.name}
+            <span
+              className="hidden max-w-48 truncate px-2 text-small text-ink-muted sm:inline"
+              title={session.email}
+            >
+              {session.email}
             </span>
             <SignOutButton />
           </nav>
         </div>
       </header>
-      <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-8 px-4 py-10 sm:px-6">{children}</main>
+      <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-8 px-4 py-10 sm:px-6">
+        {children}
+      </main>
     </div>
   );
 }

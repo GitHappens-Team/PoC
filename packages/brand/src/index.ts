@@ -7,7 +7,7 @@ import data from "../brand.json";
  * (it also rewrites the tokens in apps/web/src/styles/tokens.css).
  */
 export const brand = data as {
-  /** Product name, shown in titles, emails, the passkey prompt and authenticator apps. */
+  /** Product name, shown in titles. */
   name: string;
   /** Short line under the logo in emails and on the landing page. */
   tagline: string;
@@ -19,8 +19,28 @@ export const brand = data as {
     /** Hue/saturation source for the generated scale. */
     seed: string;
     /** The brand scale, 50 (lightest) to 1000 (darkest). Mirrors --brand-* in tokens.css. */
-    scale: Record<"50" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900" | "950" | "1000", string>;
+    scale: Record<
+      | "50"
+      | "100"
+      | "200"
+      | "300"
+      | "400"
+      | "500"
+      | "600"
+      | "700"
+      | "800"
+      | "900"
+      | "950"
+      | "1000",
+      string
+    >;
     /** Tinted neutrals for email, which can't read CSS variables. */
-    neutral: { surface: string; ink: string; inkMuted: string; border: string; inkMutedDark: string };
+    neutral: {
+      surface: string;
+      ink: string;
+      inkMuted: string;
+      border: string;
+      inkMutedDark: string;
+    };
   };
 };
