@@ -2,9 +2,7 @@ import Link from "next/link";
 import { brand } from "@repo/brand";
 import {
   IconLogin,
-  IconMail,
   IconShieldLock,
-  IconDatabase,
   IconBrandSupabase,
 } from "@tabler/icons-react";
 import { LogoLockup, LogoMark } from "@/components/logos";
