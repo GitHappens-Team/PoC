@@ -1,0 +1,32 @@
+{
+  "name": "@repo/emails",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "scripts": {
+    "dev": "email dev --dir src/templates --port 3030",
+    "assets": "node scripts/build-assets.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-email/render": "^2.1.0",
+    "@repo/brand": "workspace:*",
+    "react-email": "^6.11.0"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@react-email/ui": "^6.11.0",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sharp": "^0.35.5",
+    "typescript": "^5"
+  }
+}
