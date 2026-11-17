@@ -9,9 +9,12 @@ export const metadata: Metadata = {
 export default async function DashboardPage() {
   const user = await requireSession("/dashboard");
 
+  const fullName: unknown = user.user_metadata?.full_name;
+  const name = typeof fullName === "string" && fullName ? fullName : user.email;
+
   return (
     <>
-      <h1 className="text-title">Hi, {user?.email}!</h1>
+      <h1 className="text-title">Hi, {name}!</h1>
 
       {/* Starting point: replace this card with your product's first screen. */}
       <section className="flex flex-col gap-3 rounded-lg border border-card-border bg-card p-6 shadow-card">
