@@ -5,7 +5,8 @@ import { ExtractTablesWithRelations, sql } from "drizzle-orm";
 import { PgTransaction } from "drizzle-orm/pg-core";
 
 export function createDb(url: string) {
-  return drizzle(postgres(url), { schema });
+  // Supabase's transaction pooler doesn't support prepared statements.
+  return drizzle(postgres(url, { prepare: false }), { schema });
 }
 
 /**
