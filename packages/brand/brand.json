@@ -1,0 +1,30 @@
+{
+  "name": "Your App",
+  "tagline": "Your idea, ready to launch.",
+  "description": "Authentication, email, a database and a landing page: everything you need to start building your product.",
+  "lang": "en",
+  "colors": {
+    "seed": "#4f46e5",
+    "scale": {
+      "50": "#efeffb",
+      "100": "#d7d6f4",
+      "200": "#aba7e0",
+      "300": "#6f69c7",
+      "400": "#3d36a8",
+      "500": "#1d178a",
+      "600": "#151070",
+      "700": "#110c5d",
+      "800": "#0d094b",
+      "900": "#080534",
+      "950": "#020112",
+      "1000": "#02010a"
+    },
+    "neutral": {
+      "surface": "#f8f7fc",
+      "ink": "#191924",
+      "inkMuted": "#5c5a6c",
+      "border": "#d7d7e0",
+      "inkMutedDark": "#9f9eb3"
+    }
+  }
+}

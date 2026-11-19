@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "../styles/tokens.css";
+
+/*
+ * Dark mode follows tokens.css: `data-theme="dark"` on <html>, or the OS
+ * preference unless the app has forced `data-theme="light"`.
+ */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/*
+ * shadcn semantic colours -> brand tokens. Utilities resolve the token
+ * at use time, so both themes switch through tokens.css alone.
+ * Note: the handoff's `--accent` is an ink colour (links, focus ring), while
+ * shadcn's `accent` is a hover fill, so `bg-accent` maps to `--ghost-hover`
+ * and the handoff accent is exposed as `text-brand-accent`.
+ */
+@theme inline {
+  --color-background: var(--surface);
+  --color-foreground: var(--ink);
+  --color-card: var(--card);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--on-primary);
+  --color-secondary: var(--surface-subtle);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--surface-subtle);
+  --color-muted-foreground: var(--ink-muted);
+  --color-accent: var(--ghost-hover);
+  --color-accent-foreground: var(--ghost-ink);
+  --color-destructive: var(--error);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--accent);
+
+  --color-brand-accent: var(--accent);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-border: var(--primary-border);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-warning: var(--warning);
+  --color-card-border: var(--card-border);
+
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+  --color-brand-1000: var(--brand-1000);
+
+  --color-chart-1: var(--brand-300);
+  --color-chart-2: var(--brand-400);
+  --color-chart-3: var(--brand-500);
+  --color-chart-4: var(--brand-600);
+  --color-chart-5: var(--brand-700);
+
+  --color-sidebar: var(--surface-subtle);
+  --color-sidebar-foreground: var(--ink);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--on-primary);
+  --color-sidebar-accent: var(--ghost-hover);
+  --color-sidebar-accent-foreground: var(--ghost-ink);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--accent);
+
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
+
+  --shadow-card: var(--shadow-card);
+
+  /* --radius-sm/md/lg come straight from tokens.css (5 / 10 / 15px). */
+  --radius-xl: calc(var(--radius-lg) * 1.4);
+  --radius-2xl: calc(var(--radius-lg) * 1.8);
+  --radius-3xl: calc(var(--radius-lg) * 2.2);
+  --radius-4xl: calc(var(--radius-lg) * 2.6);
+}
+
+:root {
+  --radius: var(--radius-lg);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+  :focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+/*
+ * Logo colours. The logo components fill with currentColor (symbol), plus
+ * --logo-wordmark (the name) and --logo-accent (its last word), which fall back to
+ * currentColor. `logo-brand` sets the brand pairings for each theme; without
+ * it a logo is single-colour and follows `text-*`.
+ */
+@utility logo-brand {
+  color: var(--brand-600);
+  --logo-wordmark: var(--brand-900);
+  --logo-accent: var(--brand-600);
+  @variant dark {
+    color: var(--brand-50);
+    --logo-wordmark: var(--brand-50);
+    --logo-accent: var(--brand-200);
+  }
+}
