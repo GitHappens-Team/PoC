@@ -14,6 +14,7 @@
     "@repo/auth": "workspace:*",
     "@repo/brand": "workspace:*",
     "@repo/db": "workspace:*",
+    "@shopify/shopify-api": "^15.1.2",
     "@tabler/icons-react": "^3.51.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

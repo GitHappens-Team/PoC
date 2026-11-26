@@ -14,5 +14,10 @@ export const env = {
     required(
       "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
       process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+
     ),
+  SHOPIFY_SHOP_DOMAIN: () => required("SHOPIFY_SHOP_DOMAIN"),
+  SHOPIFY_CLIENT_ID: () => required("SHOPIFY_CLIENT_ID"),
+  SHOPIFY_CLIENT_SECRET: ()=> required("SHOPIFY_CLIENT_SECRET"),
+
 };
