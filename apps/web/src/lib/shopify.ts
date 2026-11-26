@@ -1,3 +1,4 @@
+import "server-only";
 import "@shopify/shopify-api/adapters/node";
 import {
   shopifyApi,
@@ -19,13 +20,19 @@ function isUnauthorizedError(error: unknown): boolean {
   return response?.code === 401 || response?.statusCode === 401;
 }
 
-function validateConfig(config: ShopifyClientConfig): void {
+function validateConfig(config: ShopifyClientConfig): ShopifyClientConfig {
   const requiredFields = ["shopDomain", "clientId", "clientSecret"] as const;
   for (const field of requiredFields) {
     if (!config[field].trim()) {
       throw new Error(`Missing required config: ${field}`);
     }
   }
+  return {
+    shopDomain: config.shopDomain.trim(),
+    clientId: config.clientId.trim(),
+    clientSecret: config.clientSecret.trim(),
+    scopes: config.scopes,
+  };
 }
 
 export interface ShopifyClientConfig {
@@ -43,12 +50,12 @@ export interface ShopifyClient {
 }
 
 export function createShopifyClient(config: ShopifyClientConfig): ShopifyClient {
-  validateConfig(config);
+  const cleanConfig = validateConfig(config);
 
   const shopify = shopifyApi({
-    apiKey: config.clientId,
-    apiSecretKey: config.clientSecret,
-    scopes: config.scopes ?? ["read_products"],
+    apiKey: cleanConfig.clientId,
+    apiSecretKey: cleanConfig.clientSecret,
+    scopes: cleanConfig.scopes ?? ["read_products"],
     hostName: "localhost",
     apiVersion: ApiVersion.October26,
     isEmbeddedApp: false,
@@ -61,7 +68,7 @@ export function createShopifyClient(config: ShopifyClientConfig): ShopifyClient 
   async function fetchSession(): Promise<Session> {
     try {
       const token = await shopify.auth.clientCredentials({
-        shop: config.shopDomain,
+        shop: cleanConfig.shopDomain,
       });
       cachedSession = token.session;
       return token.session;
