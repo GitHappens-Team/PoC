@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IconRocket } from "@tabler/icons-react";
 import { requireSession } from "@/lib/session";
+import { getDefaultShopifyClient } from "@/lib/shopify";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 
 export default async function DashboardPage() {
   const user = await requireSession("/dashboard");
+  const shopify = getDefaultShopifyClient();
 
   const fullName: unknown = user.user_metadata?.full_name;
   const name = typeof fullName === "string" && fullName ? fullName : user.email;
@@ -28,6 +30,24 @@ export default async function DashboardPage() {
             apps/web/src/app/(app)/dashboard/page.tsx
           </code>{" "}
           to build your product.
+        </p>
+        <p className="text-body text-ink-muted">
+          Connected to shop:{" "}
+          {
+            (
+              (await shopify.query(
+                `#graphql
+  {
+  shop {
+    name
+    myshopifyDomain
+    plan { displayName }
+  }
+}`,
+                {},
+              )) as any
+            ).shop.name
+          }
         </p>
       </section>
     </>

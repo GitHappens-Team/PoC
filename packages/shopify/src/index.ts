@@ -47,7 +47,9 @@ export interface ShopifyClient {
   ): Promise<T>;
 }
 
-export function createShopifyClient(config: ShopifyClientConfig): ShopifyClient {
+export function createShopifyClient(
+  config: ShopifyClientConfig,
+): ShopifyClient {
   const cleanConfig = validateConfig(config);
 
   const shopify = shopifyApi({
