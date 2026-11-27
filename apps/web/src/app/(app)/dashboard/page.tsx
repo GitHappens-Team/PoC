@@ -35,7 +35,13 @@ export default async function DashboardPage() {
           Connected to shop:{" "}
           {
             (
-              (await shopify.query(
+              await shopify.query<{
+                shop: {
+                  name: string;
+                  myshopifyDomain: string;
+                  plan: { displayName: string };
+                };
+              }>(
                 `#graphql
   {
   shop {
@@ -45,7 +51,7 @@ export default async function DashboardPage() {
   }
 }`,
                 {},
-              )) as any
+              )
             ).shop.name
           }
         </p>
